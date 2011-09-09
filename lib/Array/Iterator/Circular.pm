@@ -17,7 +17,7 @@ sub _init {
 
 # always return true, since
 # we just keep looping
-sub hasNext { 1 }
+sub has_next { 1 }
 
 sub next {
 	my ($self) = @_;
@@ -32,22 +32,28 @@ sub next {
 # ever stop dispensing items
 # they can just be aliases of
 # one another.
-*getNext = \&next;
+*get_next = \&next;
 
-sub isStart {
+sub is_start {
     my ($self) = @_;
     return ($self->_current_index() == 0);
 }
 
-sub isEnd {
+sub isStart { my $self = shift; $self->is_start(@_) }
+
+sub is_end {
     my ($self) = @_;
     return ($self->_current_index() == $self->getLength());
 }
 
-sub getLoopCount {
+sub isEnd { my $self = shift; $self->is_end(@_) }
+
+sub get_loop_count {
     my ($self) = @_;
     return $self->{loop_counter};
 }
+
+sub getLoopCount { my $self = shift; $self->get_loop_count(@_) }
 
 1;
 #ABSTRACT: A subclass of Array::Iterator to allow circular iteration
@@ -70,16 +76,16 @@ __END__
       # we assign color from our color
       # iterator, which will keep dispensing
       # as it loops through its set
-      $item->setColor($color_iterator->next());
+      $item->set_color($color_iterator->next());
   }
 
   # tell us how many times the set
   # was looped through
-  print $color_iterator->getLoopCount();
+  print $color_iterator->get_loop_count();
 
 =head1 DESCRIPTION
 
-This iterator will loop continuosly as long as C<next> or C<getNext> is called. The C<hasNext> method will always return true (C<1>), since the list will always loop back. This is useful when you need a list to repeat itself, but don't want to (or care to) know that it is doing so.
+This iterator will loop continuosly as long as C<next> or C<get_next> is called. The C<has_next> method will always return true (C<1>), since the list will always loop back. This is useful when you need a list to repeat itself, but don't want to (or care to) know that it is doing so.
 
 =head1 METHODS
 
@@ -87,7 +93,7 @@ This is a subclass of Array::Iterator, only those methods that have been added o
 
 =over 4
 
-=item B<hasNext>
+=item B<has_next>
 
 Since we endlessly loop, this will always return true (C<1>).
 
@@ -95,19 +101,19 @@ Since we endlessly loop, this will always return true (C<1>).
 
 This will return the next item in the array, and when it reaches the end of the array, it will loop back to the begining again.
 
-=item B<getNext>
+=item B<get_next>
 
 This method is now defined in terms of C<next>, since neither will even stop dispensing items, there is no need to differentiate.
 
-=item B<isStart>
+=item B<is_start>
 
 If at anytime during your looping, you want to know if you have arrived back at the start of you list, you can ask this method.
 
-=item B<isEnd>
+=item B<is_end>
 
 If at anytime during your looping, you want to know if you have gotten to the end of you list, you can ask this method.
 
-=item B<getLoopCount>
+=item B<get_loop_count>
 
 This method will tell you how many times the iterator has looped back to its start.
 

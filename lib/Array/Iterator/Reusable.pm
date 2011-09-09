@@ -27,7 +27,7 @@ __END__
 
   # do something with the iterator
   my @accumulation;
-  push @accumulation => { item => $iterator->next() } while $iterator->hasNext();
+  push @accumulation => { item => $iterator->next() } while $iterator->has_next();
 
   # now reset the iterator so we can do it again
   $iterator->reset();

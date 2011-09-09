@@ -9,10 +9,12 @@ use warnings;
 use Array::Iterator;
 our @ISA = qw(Array::Iterator);
 
-sub hasPrevious {
+sub has_previous {
 	my ($self) = @_;
 	return (($self->_current_index - 1) > 0) ? 1 : 0;
 }
+
+sub hasPrevious { my $self = shift; $self->has_previous(@_) }
 
 sub previous {
 	my ($self) = @_;
@@ -21,17 +23,21 @@ sub previous {
 	return $self->_getItem($self->_iteratee, --$self->_current_index);
 }
 
-sub getPrevious {
+sub get_previous {
 	my ($self) = @_;
     return undef unless (($self->_current_index - 1) > 0);
 	return $self->_getItem($self->_iteratee, --$self->_current_index);
 }
 
-sub lookBack {
+sub getPrevious { my $self = shift; $self->get_previous(@_) }
+
+sub look_back {
 	my ($self) = @_;
     return undef unless (($self->_current_index - 2) > 0);
 	return $self->_getItem($self->_iteratee, ($self->_current_index - 2));
 }
+
+sub lookBack { my $self = shift; $self->look_back(@_) }
 
 
 1;
@@ -48,11 +54,11 @@ __END__
   while ($some_condition_exists) {
       # get the latest item from
       # the iterator
-      my $current = $i->getNext();
+      my $current = $i->get_next();
       # ...
       if ($something_happens) {
           # back up the iterator
-          $current = $i->getPrevious();
+          $current = $i->get_previous();
       }
   }
 
@@ -66,7 +72,7 @@ This is a subclass of Array::Iterator, only those methods that have been added a
 
 =over 4
 
-=item B<hasPrevious>
+=item B<has_previous>
 
 This method works much like C<isNext> does, it will return true (C<1>) unless the begining of the array has been reached, and false (C<0>) otherwise.
 
@@ -74,11 +80,11 @@ This method works much like C<isNext> does, it will return true (C<1>) unless th
 
 This method is much like C<next>. It will return the previous item in the iterator, and throw an exception if it attempts to reach past the begining of the array.
 
-=item B<getPrevious>
+=item B<get_previous>
 
-This method is much like C<getNext>. It will return the previous item in the iterator, and return undef if it attempts to reach past the begining of the array.
+This method is much like C<get_next>. It will return the previous item in the iterator, and return undef if it attempts to reach past the begining of the array.
 
-=item B<lookBack>
+=item B<look_back>
 
 This is the counterpart to C<peek>, it will return the previous items in the iterator, but will not affect the internal counter.
 

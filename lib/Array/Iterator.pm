@@ -88,10 +88,12 @@ sub _getItem {
 # this defines the interface
 # an iterator object will have
 
-sub hasNext {
+sub has_next {
 	my ($self) = @_;
 	return ($self->{_current_index} < $self->{_length}) ? 1 : 0;
 }
+
+sub hasNext { my $self = shift; $self->has_next(@_) }
 
 sub next {
 	my ($self) = @_;
@@ -100,11 +102,13 @@ sub next {
 	return $self->_getItem($self->{_iteratee}, $self->{_current_index}++);
 }
 
-sub getNext {
+sub get_next {
 	my ($self) = @_;
     return undef unless ($self->{_current_index} < $self->{_length});
 	return $self->_getItem($self->{_iteratee}, $self->{_current_index}++);
 }
+
+sub getNext { my $self = shift; $self->get_next(@_) }
 
 sub peek {
 	my ($self) = @_;
@@ -117,15 +121,19 @@ sub current {
 	return $self->_getItem($self->{_iteratee}, $self->currentIndex());
 }
 
-sub currentIndex {
+sub current_index {
 	my ($self) = @_;
 	return ($self->{_current_index} != 0) ? $self->{_current_index} - 1 : 0;
 }
 
-sub getLength {
+sub currentIndex { my $self = shift; $self->current_index(@_) }
+
+sub get_length {
     my ($self) = @_;
     return $self->{_length};
 }
+
+sub getLength { my $self = shift; $self->get_length(@_) }
 
 1;
 __END__
@@ -145,7 +153,7 @@ __END__
   my $i = Array::Iterator->new({ __array__ => \@array });
 
   # a base iterator example
-  while ($i->hasNext()) {
+  while ($i->has_next()) {
       if ($i->peek() < 50) {
           # ... do something because
           # the next element is over 50
@@ -156,17 +164,17 @@ __END__
 
   # shortcut style
   my @accumulation;
-  push @accumulation => { item => $iterator->next() } while $iterator->hasNext();
+  push @accumulation => { item => $iterator->next() } while $iterator->has_next();
 
   # C++ ish style iterator
-  for (my $i = Array::Iterator->new(@array); $i->hasNext(); $i->next()) {
+  for (my $i = Array::Iterator->new(@array); $i->has_next(); $i->next()) {
     my $current = $i->current();
     # .. do something with current
   }
 
   # common perl iterator idiom
   my $current;
-  while ($current = $i->getNext()) {
+  while ($current = $i->get_next()) {
     # ... do something with $current
   }
 
@@ -199,7 +207,7 @@ of a HASH reference, with the key, __array__:
 
   my $i = Array::Iterator->new({ __array__ => \@array });
 
-=item B<hasNext>
+=item B<has_next>
 
 This methods returns a boolean. True (1) if there are still more elements in
 the iterator, false (0) if there are not.
@@ -211,7 +219,7 @@ once per iteration as it will advance the index pointer to the next item. If
 this method is called after all elements have been exhausted, an exception
 will be thrown.
 
-=item B<getNext>
+=item B<get_next>
 
 This method returns the next item in the iterator, be sure to only call this
 once per iteration as it will advance the index pointer to the next item. If
@@ -221,14 +229,14 @@ undef.
 This method was added to allow for a faily common perl iterator idiom of:
 
   my $current;
-  while ($current = $i->getNext()) {
+  while ($current = $i->get_next()) {
       ...
   }
 
 In this the loop terminates once C<$current> is assigned to a false value.
 The only problem with this idiom for me is that it does not allow for
 undefined or false values in the iterator. Of course, if this fits your
-data, then there is no problem. Otherwise I would recommend the C<hasNext>/C<next>
+data, then there is no problem. Otherwise I would recommend the C<has_next>/C<next>
 idiom instead.
 
 =item B<peek>
@@ -246,15 +254,15 @@ to be able to peek ahead effectively.
 
 This method can be used to get the current item in the iterator. It is non-destructive,
 meaning that it does not advance the internal pointer. This value will match the
-last value dispensed by C<next> or C<getNext>.
+last value dispensed by C<next> or C<get_next>.
 
-=item B<currentIndex>
+=item B<current_index>
 
 This method can be used to get the current index in the iterator. It is non-destructive,
 meaning that it does not advance the internal pointer. This value will match the index
-of the last value dispensed by C<next> or C<getNext>.
+of the last value dispensed by C<next> or C<get_next>.
 
-=item B<getLength>
+=item B<get_length>
 
 This is a basic accessor for getting the length of the array being iterated over.
 

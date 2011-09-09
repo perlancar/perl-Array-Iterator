@@ -3,10 +3,10 @@
 use strict;
 use warnings;
 
-use Test::More tests => 78;
+use Test::More tests => 82;
 
-BEGIN { 
-    use_ok('Array::Iterator') 
+BEGIN {
+    use_ok('Array::Iterator')
 };
 
 my @control = (1 .. 5);
@@ -26,12 +26,16 @@ can_ok($iterator, '_iteratee');
 
 # check out public methods
 can_ok($iterator, 'hasNext');
+can_ok($iterator, 'has_next');
 can_ok($iterator, 'next');
 can_ok($iterator, 'peek');
 can_ok($iterator, 'getNext');
+can_ok($iterator, 'get_next');
 can_ok($iterator, 'current');
 can_ok($iterator, 'currentIndex');
+can_ok($iterator, 'current_index');
 can_ok($iterator, 'getLength');
+can_ok($iterator, 'get_length');
 
 # now check the behavior
 
@@ -40,21 +44,21 @@ cmp_ok($iterator->getLength(), '==', 5, '... got the right length');
 for (my $i = 0; $i < scalar @control; $i++) {
     # we should still have another one
     ok($iterator->hasNext(), '... we have more elements');
-    # and out iterator peek should match our control index 
-    # (since we have not incremented the iterator's counter) 
+    # and out iterator peek should match our control index
+    # (since we have not incremented the iterator's counter)
     unless ($i >= (scalar(@control))) {
-        cmp_ok($iterator->peek(), '==', $control[$i], 
+        cmp_ok($iterator->peek(), '==', $control[$i],
                '... our control should match our iterator->peek');
     }
     else {
         ok(!defined($iterator->peek()), '... this should return undef now');
     }
-    # and out iterator should match our control 
-    cmp_ok($iterator->next(), '==', $control[$i], 
-           '... our control should match our iterator->next');    
-    # and out iterator peek should match our control + 1 (now that we have incremented the counter) 
+    # and out iterator should match our control
+    cmp_ok($iterator->next(), '==', $control[$i],
+           '... our control should match our iterator->next');
+    # and out iterator peek should match our control + 1 (now that we have incremented the counter)
     unless (($i + 1) >= (scalar(@control))) {
-        cmp_ok($iterator->peek(), '==', $control[$i + 1], 
+        cmp_ok($iterator->peek(), '==', $control[$i + 1],
                '... our control should match our iterator->peek');
     }
     else {
@@ -62,10 +66,10 @@ for (my $i = 0; $i < scalar @control; $i++) {
     }
 }
 
-# we should have no more 
+# we should have no more
 ok(!$iterator->hasNext(), '... we should have no more');
 
-# now use an array ref in the constructor 
+# now use an array ref in the constructor
 # and try using it in this style loop
 for (my $i = Array::Iterator->new(\@control); $i->hasNext(); $i->next()) {
 	cmp_ok($i->current(), '==', $control[$i->currentIndex()], '... these should be equal');
@@ -78,16 +82,16 @@ push @acc, => $iterator2->next() while $iterator2->hasNext();
 # our accumulation and control should be the same
 ok(eq_array(\@acc, \@control), '... these arrays should be equal');
 
-# we should have no more 
+# we should have no more
 ok(!$iterator2->hasNext(), '... we should have no more');
 
 {
     my $iterator3 = Array::Iterator->new(\@control);
-    
+
     my $current;
     while ($current = $iterator3->getNext()) {
         if ($iterator3->currentIndex() + 1 < (scalar(@control))) {
-            cmp_ok($iterator3->peek(), '==', $control[$iterator3->currentIndex() + 1], '... these should be equal (peek & currentIndex + 1)');                
+            cmp_ok($iterator3->peek(), '==', $control[$iterator3->currentIndex() + 1], '... these should be equal (peek & currentIndex + 1)');
         }
         else {
             ok(!defined($iterator3->peek()), '... this should return undef now');
@@ -98,7 +102,7 @@ ok(!$iterator2->hasNext(), '... we should have no more');
 
     ok(!defined($iterator3->getNext()), '... we should get undef');
 
-    # we should have no more 
+    # we should have no more
     ok(!$iterator3->hasNext(), '... we should have no more');
 }
 
@@ -110,7 +114,7 @@ ok(!$iterator2->hasNext(), '... we should have no more');
     my $current;
     while ($current = $iterator4->getNext()) {
         if ($iterator4->currentIndex() + 1 < (scalar(@control))) {
-            cmp_ok($iterator4->peek(), '==', $control[$iterator4->currentIndex() + 1], '... these should be equal (peek & currentIndex + 1)');                
+            cmp_ok($iterator4->peek(), '==', $control[$iterator4->currentIndex() + 1], '... these should be equal (peek & currentIndex + 1)');
         }
         else {
             ok(!defined($iterator4->peek()), '... this should return undef now');
@@ -121,6 +125,6 @@ ok(!$iterator2->hasNext(), '... we should have no more');
 
     ok(!defined($iterator4->getNext()), '... we should get undef');
 
-    # we should have no more 
+    # we should have no more
     ok(!$iterator4->hasNext(), '... we should have no more');
 }
