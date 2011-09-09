@@ -4,7 +4,7 @@ package Array::Iterator::Circular;
 use strict;
 use warnings;
 
-our $VERSION = '0.01';
+# VERSION
 
 use Array::Iterator;
 our @ISA = qw(Array::Iterator);
@@ -15,22 +15,22 @@ sub _init {
     $self->SUPER::_init(@args);
 }
 
-# always return true, since 
+# always return true, since
 # we just keep looping
 sub hasNext { 1 }
 
 sub next {
 	my ($self) = @_;
     unless ($self->_current_index < $self->getLength()) {
-        $self->_current_index = 0; 
+        $self->_current_index = 0;
         $self->{loop_counter}++;
     }
 	return $self->_getItem($self->_iteratee(), $self->_current_index++);
 }
 
-# since neither of them will 
+# since neither of them will
 # ever stop dispensing items
-# they can just be aliases of 
+# they can just be aliases of
 # one another.
 *getNext = \&next;
 
@@ -50,24 +50,21 @@ sub getLoopCount {
 }
 
 1;
+#ABSTRACT: A subclass of Array::Iterator to allow circular iteration
 __END__
-
-=head1 NAME
-
-Array::Iterator::Circular - A subclass of Array::Iterator to allow circular iteration
 
 =head1 SYNOPSIS
 
   use Array::Iterator::Circular;
-  
+
   # create an instance with a
   # small array
   my $color_iterator = Array::Iterator::Circular->new(qw(red green blue orange));
-  
-  # this is a large list of 
+
+  # this is a large list of
   # arbitrary items
-  my @long_list_of_items = ( ... ); 
-  
+  my @long_list_of_items = ( ... );
+
   # as we loop through the items ...
   foreach my $item (@long_list_of_items) {
       # we assign color from our color
@@ -75,14 +72,14 @@ Array::Iterator::Circular - A subclass of Array::Iterator to allow circular iter
       # as it loops through its set
       $item->setColor($color_iterator->next());
   }
-  
+
   # tell us how many times the set
   # was looped through
   print $color_iterator->getLoopCount();
 
 =head1 DESCRIPTION
 
-This iterator will loop continuosly as long as C<next> or C<getNext> is called. The C<hasNext> method will always return true (C<1>), since the list will always loop back. This is useful when you need a list to repeat itself, but don't want to (or care to) know that it is doing so. 
+This iterator will loop continuosly as long as C<next> or C<getNext> is called. The C<hasNext> method will always return true (C<1>), since the list will always loop back. This is useful when you need a list to repeat itself, but don't want to (or care to) know that it is doing so.
 
 =head1 METHODS
 
@@ -118,7 +115,7 @@ This method will tell you how many times the iterator has looped back to its sta
 
 =head1 BUGS
 
-None that I am aware of, if you find a bug, let me know, and I will be sure to fix it. 
+None that I am aware of, if you find a bug, let me know, and I will be sure to fix it.
 
 =head1 CODE COVERAGE
 
@@ -128,17 +125,17 @@ See the B<CODE COVERAGE> section of the B<Array::Iterator> documentation for inf
 
 This is a subclass of B<Array::Iterator>, please refer to it for more documenation.
 
-=head1 AUTHOR
+=head1 ORIGINAL AUTHOR
 
 stevan little, E<lt>stevan@iinteractive.comE<gt>
 
-=head1 COPYRIGHT AND LICENSE
+=head1 ORIGINAL COPYRIGHT AND LICENSE
 
 Copyright 2004 by Infinity Interactive, Inc.
 
 L<http://www.iinteractive.com>
 
 This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself. 
+it under the same terms as Perl itself.
 
 =cut
