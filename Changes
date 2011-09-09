@@ -1,0 +1,49 @@
+Revision history for Perl extension Array::Iterator.
+
+0.06 Fri July 8, 2005
+    - Fixed bug in Array::Iterator::peek(). 
+      Thanks to Hugo Cornelis for pointing it out
+        - added tests for this
+    - Added patch from Phillip Moore to support
+      *single element iteration* using the hash-ref
+      constructor option.
+        - added tests and docs for this (also from Phillip :)
+
+0.05 Mon July 15, 2004
+    - added a getLegnth method and tested it
+    - changed how currentIndex deals with index of 0, it
+      now does it correctly. 
+    - made current use currentIndex to get the current
+      index
+    - made Array::Iterator more subclass friendly by adding
+      some 'protected' methods to access some fields with
+    - added some subclasses:
+        - Array::Iterator::BiDirectional
+        - Array::Iterator::Circular
+        - Array::Iterator::Reusable        
+    - created tests for all these new modules
+
+0.04 Thurs May 6 2004
+    - Changed current and currentIndex to refer to the 
+      same value (and index) of the last item dispensed
+      by the next method. This is more in line with what
+      they should do. Prior to this version they returned
+      the current index which was actually the one past the 
+      last call to next.
+    - tested these changes and altered tests which used the 
+      old versions.
+    - updated documentation to reflect change
+
+0.03  Sun May 2 2004
+    - Added currentIndex method, and added tests for it.
+    - Added getNext method and added tests for it.
+    - altered the behavior of peek to not throw an exception.
+    - updated all documentation.
+
+0.02  Mon April 12 2004
+    - error in the Makefile.PL file, no changes on this release
+
+0.01  Wed Mar 17 23:12:08 2004
+	- original version; created by h2xs 1.22 with options
+		-X -n Array::Iterator
+
