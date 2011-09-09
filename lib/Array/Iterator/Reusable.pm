@@ -11,6 +11,7 @@ our @ISA = qw(Array::Iterator);
 
 sub reset {
     my ($self) = @_;
+    $self->_iterated = 0;
     $self->_current_index = 0;
 }
 

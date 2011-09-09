@@ -34,7 +34,8 @@ sub new {
 	my $iterator = {
         _current_index => 0,
         _length => 0,
-        _iteratee => []
+        _iteratee => [],
+        _iterated => 0,
         };
 	bless($iterator, $class);
 	$iterator->_init(scalar(@{$_array}), $_array);
@@ -83,10 +84,22 @@ sub _getItem {
 	return $iteratee->[$index];
 }
 
+# we need to alter this so its an lvalue
+sub _iterated : lvalue {
+    (UNIVERSAL::isa((caller)[0], __PACKAGE__))
+        || die "Illegal Operation : This method can only be called by a subclass";
+    $_[0]->{_iterated}
+}
+
 # public methods
 
 # this defines the interface
 # an iterator object will have
+
+sub iterated {
+    my ($self) = @_;
+    return $self->{_iterated};
+}
 
 sub has_next {
 	my ($self) = @_;
@@ -99,11 +112,13 @@ sub next {
 	my ($self) = @_;
     ($self->{_current_index} < $self->{_length})
         || die "Out Of Bounds : no more elements";
+        $self->{_iterated} = 1;
 	return $self->_getItem($self->{_iteratee}, $self->{_current_index}++);
 }
 
 sub get_next {
 	my ($self) = @_;
+        $self->{_iterated} = 1;
     return undef unless ($self->{_current_index} < $self->{_length});
 	return $self->_getItem($self->{_iteratee}, $self->{_current_index}++);
 }

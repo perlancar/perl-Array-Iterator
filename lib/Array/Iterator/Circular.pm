@@ -25,6 +25,7 @@ sub next {
         $self->_current_index = 0;
         $self->{loop_counter}++;
     }
+        $self->_iterated = 1;
 	return $self->_getItem($self->_iteratee(), $self->_current_index++);
 }
 

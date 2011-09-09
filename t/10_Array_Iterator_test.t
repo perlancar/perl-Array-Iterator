@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 82;
+use Test::More tests => 85;
 
 BEGIN {
     use_ok('Array::Iterator')
@@ -36,8 +36,11 @@ can_ok($iterator, 'currentIndex');
 can_ok($iterator, 'current_index');
 can_ok($iterator, 'getLength');
 can_ok($iterator, 'get_length');
+can_ok($iterator, 'iterated');
 
 # now check the behavior
+
+ok(!$iterator->iterated(), '... not yet iterated, iterated() is false');
 
 cmp_ok($iterator->getLength(), '==', 5, '... got the right length');
 
@@ -65,6 +68,8 @@ for (my $i = 0; $i < scalar @control; $i++) {
         ok(!defined($iterator->peek()), '... this should return undef now');
     }
 }
+
+ok($iterator->iterated(), '... has been iterated, iterated() is true');
 
 # we should have no more
 ok(!$iterator->hasNext(), '... we should have no more');

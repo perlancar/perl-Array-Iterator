@@ -20,12 +20,14 @@ sub previous {
 	my ($self) = @_;
     (($self->_current_index - 1) > 0)
         || die "Out Of Bounds : no more elements";
+        $self->_iterated = 1;
 	return $self->_getItem($self->_iteratee, --$self->_current_index);
 }
 
 sub get_previous {
 	my ($self) = @_;
     return undef unless (($self->_current_index - 1) > 0);
+        $self->_iterated = 1;
 	return $self->_getItem($self->_iteratee, --$self->_current_index);
 }
 
@@ -34,11 +36,11 @@ sub getPrevious { my $self = shift; $self->get_previous(@_) }
 sub look_back {
 	my ($self) = @_;
     return undef unless (($self->_current_index - 2) > 0);
+        $self->_iterated = 1;
 	return $self->_getItem($self->_iteratee, ($self->_current_index - 2));
 }
 
 sub lookBack { my $self = shift; $self->look_back(@_) }
-
 
 1;
 #ABSTRACT: A subclass of Array::Iterator to allow forwards and backwards iteration
