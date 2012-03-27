@@ -10,8 +10,15 @@ use Array::Iterator;
 our @ISA = qw(Array::Iterator);
 
 sub has_previous {
-	my ($self) = @_;
-	return (($self->_current_index - 1) > 0) ? 1 : 0;
+	my ($self, $n) = @_;
+
+    if(not defined $n) { $n = 1 }
+    elsif(not $n)      { die "has_previous(0) doesn't make sense, did you mean current()?" }
+    elsif($n < 0)      { die "has_previous() with negative argument doesn't make sense, did you mean has_next()?" }
+
+    my $idx = $self->_current_index - $n;
+
+	return ($idx > 0) ? 1 : 0;
 }
 
 sub hasPrevious { my $self = shift; $self->has_previous(@_) }
@@ -34,10 +41,17 @@ sub get_previous {
 sub getPrevious { my $self = shift; $self->get_previous(@_) }
 
 sub look_back {
-	my ($self) = @_;
-    return undef unless (($self->_current_index - 2) > 0);
-        $self->_iterated = 1;
-	return $self->_getItem($self->_iteratee, ($self->_current_index - 2));
+	my ($self, $n) = @_;
+
+    if(not defined $n) { $n = 1 }
+    elsif(not $n)      { die "look_back(0) doesn't make sense, did you mean get_previous()?" }
+    elsif($n < 0)      { die "look_back() with negative argument doesn't make sense, did you mean get_next()?" }
+
+    my $idx = $self->_current_index - ($n + 1);
+
+    return undef unless ($idx > 0);
+    $self->_iterated = 1;
+	return $self->_getItem($self->_iteratee, $idx);
 }
 
 sub lookBack { my $self = shift; $self->look_back(@_) }
