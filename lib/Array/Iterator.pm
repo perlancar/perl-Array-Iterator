@@ -102,8 +102,15 @@ sub iterated {
 }
 
 sub has_next {
-	my ($self) = @_;
-	return ($self->{_current_index} < $self->{_length}) ? 1 : 0;
+	my ($self, $n) = @_;
+
+    if(not defined $n) { $n = 1 }
+    elsif(not $n)      { die "has_next(0) doesn't make sense, did you mean current()?" }
+    elsif($n < 0)      { die "has_next() with negative argument doesn't make sense, perhaps you should use a BiDirectional iterator" }
+
+    my $idx = $self->{_current_index} + ($n - 1);
+
+	return ($idx < $self->{_length}) ? 1 : 0;
 }
 
 sub hasNext { my $self = shift; $self->has_next(@_) }
@@ -126,9 +133,16 @@ sub get_next {
 sub getNext { my $self = shift; $self->get_next(@_) }
 
 sub peek {
-	my ($self) = @_;
-    return undef unless (($self->{_current_index}) < $self->{_length});
-	return $self->_getItem($self->{_iteratee}, ($self->{_current_index}));
+	my ($self, $n) = @_;
+
+    if(not defined $n) { $n = 1 }
+    elsif(not $n)      { die "peek(0) doesn't make sense, did you mean get_next()?" }
+    elsif($n < 0)      { die "peek() with negative argument doesn't make sense, perhaps you should use a BiDirectional iterator" }
+
+    my $idx = $self->{_current_index} + ($n - 1);
+
+    return undef unless ($idx < $self->{_length});
+	return $self->_getItem($self->{_iteratee}, $idx);
 }
 
 sub current {
