@@ -78,13 +78,13 @@ throws_ok {
     } qr/\Qhas_next(0) doesn't make sense/, '... should not be able to call has_next() with zero argument';
     throws_ok {
         $iterator2->has_next(-1)
-    } qr/\Qhas_next() with negative value doesn't make sense/, '... should not be able to call has_next() with negative argument';
+    } qr/\Qhas_next() with negative argument doesn't make sense/, '... should not be able to call has_next() with negative argument';
     throws_ok {
         $iterator2->peek(0)
     } qr/\Qpeek(0) doesn't make sense/, '... should not be able to call peek() with zero argument';
     throws_ok {
         $iterator2->peek(-1)
-    } qr/\Qpeek() with negative value doesn't make sense/, '... should not be able to call peek() with negative argument';
+    } qr/\Qpeek() with negative argument doesn't make sense/, '... should not be able to call peek() with negative argument';
 }
 
 # check our protected methods
