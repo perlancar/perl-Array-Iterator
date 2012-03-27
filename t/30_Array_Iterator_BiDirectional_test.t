@@ -90,8 +90,8 @@ ok($iterator3->has_previous(1), '... should be the same as has_previous() after 
 ok($iterator3->has_previous(2), '... should have 2nd previous element');
 
 cmp_ok($iterator3->look_back(1), '==', $iterator3->look_back, '... should be the same as look_back() after iterating');
-cmp_ok($iterator3->look_back(2), '==', 4,                     '... should get 2nd previous element after iterating');
-cmp_ok($iterator3->look_back(3), '==', 3,                     '... should get 3rd previous element after iterating');
+cmp_ok($iterator3->look_back(2), '==', 3,                     '... should get 2nd previous element after iterating');
+cmp_ok($iterator3->look_back(3), '==', 2,                     '... should get 3rd previous element after iterating');
 ok(!defined($iterator3->look_back(6)), '... look_back() outside of the bounds should return undef after iterating');
 
 # check arbitrary lookup edge cases
