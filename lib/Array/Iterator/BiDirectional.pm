@@ -74,9 +74,11 @@ This is a subclass of Array::Iterator, only those methods that have been added a
 
 =over 4
 
-=item B<has_previous>
+=item B<has_previous([$n])>
 
-This method works much like C<isNext> does, it will return true (C<1>) unless the begining of the array has been reached, and false (C<0>) otherwise.
+This method works much like C<hasNext> does, it will return true (C<1>) unless the begining of the array has been reached, and false (C<0>) otherwise.
+
+Optional argument has the same meaning except that it specifies C<$n>th previous element.
 
 =item B<previous>
 
@@ -86,9 +88,11 @@ This method is much like C<next>. It will return the previous item in the iterat
 
 This method is much like C<get_next>. It will return the previous item in the iterator, and return undef if it attempts to reach past the begining of the array.
 
-=item B<look_back>
+=item B<look_back([$n])>
 
 This is the counterpart to C<peek>, it will return the previous items in the iterator, but will not affect the internal counter.
+
+Optional argument has the same meaning except that it specifies C<$n>th previous element.
 
 =back
 

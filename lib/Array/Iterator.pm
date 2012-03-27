@@ -222,10 +222,21 @@ of a HASH reference, with the key, __array__:
 
   my $i = Array::Iterator->new({ __array__ => \@array });
 
-=item B<has_next>
+=item B<has_next([$n])>
 
 This methods returns a boolean. True (1) if there are still more elements in
 the iterator, false (0) if there are not.
+
+Takes an optional positive integer (E<gt> 0) that specifies the position you
+want to check. This allows you to check if there an element at arbitrary position.
+Think of it as an ordinal number you want to check:
+
+  $i->has_next(2);  # 2nd next element
+  $i->has_next(10); # 10th next element
+
+Note that C<has_next(1)> is the same as C<has_next()>.
+
+Throws an exception if C<$n> E<lt>= 0.
 
 =item B<next>
 
@@ -254,16 +265,26 @@ undefined or false values in the iterator. Of course, if this fits your
 data, then there is no problem. Otherwise I would recommend the C<has_next>/C<next>
 idiom instead.
 
-=item B<peek>
+=item B<peek([$n])>
 
 This method can be used to peek ahead at the next item in the iterator. It
 is non-destructuve, meaning it does not advance the internal pointer. If
 this method is called and attempts to reach beyond the bounds of the iterator,
 it will return undef.
 
+Takes an optional positive integer (E<gt> 0) that specifies how far ahead you want to peek:
+
+  $i->peek(2);  # gives you 2nd next element
+  $i->peek(10); # gives you 10th next element
+
+Note that C<peek(1)> is the same as C<peek()>.
+
+Throws an exception if C<$n> E<lt>= 0.
+
 B<NOTE:> Prior to version 0.03 this method would throw an exception if called
 out of bounds. I decided this was not a good practice, as it made it difficult
-to be able to peek ahead effectively.
+to be able to peek ahead effectively. This not the case when calling with an argument
+that is E<lt>= 0 though, as it's clearly a sign of incorrect usage.
 
 =item B<current>
 
