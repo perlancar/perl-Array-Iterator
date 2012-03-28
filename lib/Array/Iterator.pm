@@ -84,7 +84,7 @@ sub _getItem {
 	return $iteratee->[$index];
 }
 
-sub _get_item { _getItem(@_) }
+sub _get_item { my $self = shift; $self->_getItem(@_) }
 
 # we need to alter this so its an lvalue
 sub _iterated : lvalue {
