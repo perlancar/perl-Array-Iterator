@@ -84,6 +84,8 @@ sub _getItem {
 	return $iteratee->[$index];
 }
 
+sub _get_item { _getItem(@_) }
+
 # we need to alter this so its an lvalue
 sub _iterated : lvalue {
     (UNIVERSAL::isa((caller)[0], __PACKAGE__))
@@ -335,7 +337,7 @@ An lvalue-ed subroutine which allows access to the iterator's internal pointer.
 
 This returns the item being iteratated over, in our case an array.
 
-=item B<_getItem ($iteratee, $index)>
+=item B<_get_item ($iteratee, $index)>
 
 This method is used by all other routines to access items with. Given the iteratee
 and an index, it will return the item being stored in the C<$iteratee> at the index
