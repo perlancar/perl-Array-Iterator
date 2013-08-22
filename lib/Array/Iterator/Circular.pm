@@ -58,7 +58,8 @@ sub getLoopCount { my $self = shift; $self->get_loop_count(@_) }
 
 1;
 #ABSTRACT: A subclass of Array::Iterator to allow circular iteration
-__END__
+
+=for Pod::Coverage .+
 
 =head1 SYNOPSIS
 

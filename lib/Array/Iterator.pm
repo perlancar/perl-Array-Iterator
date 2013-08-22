@@ -167,8 +167,9 @@ sub get_length {
 sub getLength { my $self = shift; $self->get_length(@_) }
 
 1;
-__END__
 #ABSTRACT: A simple class for iterating over Perl arrays
+
+=for Pod::Coverage .+
 
 =head1 SYNOPSIS
 

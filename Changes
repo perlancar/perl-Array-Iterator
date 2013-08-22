@@ -1,5 +1,11 @@
 Revision history for Perl extension Array-Iterator
 
+0.09     2013-08-22 (SHARYANTO)
+
+         - No functional changes. Reformat Changes to be more conformant to
+           CPAN::Changes::Spec (thanks Neil Bowers).
+
+
 0.08     2012-03-28 (SHARYANTO)
 
          - peek(), look_back(), has_next(), has_previous() now accept optional

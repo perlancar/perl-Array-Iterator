@@ -58,7 +58,8 @@ sub lookBack { my $self = shift; $self->look_back(@_) }
 
 1;
 #ABSTRACT: A subclass of Array::Iterator to allow forwards and backwards iteration
-__END__
+
+=for Pod::Coverage .+
 
 =head1 SYNOPSIS
 
