@@ -91,17 +91,17 @@ This is a subclass of Array::Iterator, only those methods that have been added a
 
 =item B<has_previous([$n])>
 
-This method works much like C<hasNext> does, it will return true (C<1>) unless the begining of the array has been reached, and false (C<0>) otherwise.
+This method works much like C<hasNext> does, it will return true (C<1>) unless the beginning of the array has been reached, and false (C<0>) otherwise.
 
 Optional argument has the same meaning except that it specifies C<$n>th previous element.
 
 =item B<previous>
 
-This method is much like C<next>. It will return the previous item in the iterator, and throw an exception if it attempts to reach past the begining of the array.
+This method is much like C<next>. It will return the previous item in the iterator, and throw an exception if it attempts to reach past the beginning of the array.
 
 =item B<get_previous>
 
-This method is much like C<get_next>. It will return the previous item in the iterator, and return undef if it attempts to reach past the begining of the array.
+This method is much like C<get_next>. It will return the previous item in the iterator, and return undef if it attempts to reach past the beginning of the array.
 
 =item B<look_back([$n])>
 

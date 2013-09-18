@@ -101,7 +101,7 @@ Since we endlessly loop, this will always return true (C<1>).
 
 =item B<next>
 
-This will return the next item in the array, and when it reaches the end of the array, it will loop back to the begining again.
+This will return the next item in the array, and when it reaches the end of the array, it will loop back to the beginning again.
 
 =item B<get_next>
 

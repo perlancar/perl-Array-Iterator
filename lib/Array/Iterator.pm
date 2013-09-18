@@ -403,7 +403,7 @@ When this iterator reaches the end of its list, it will loop back to the start a
 
 =item B<Array::Iterator::Reusable>
 
-This iterator can be reset to its begining and used again.
+This iterator can be reset to its beginning and used again.
 
 =back
 
