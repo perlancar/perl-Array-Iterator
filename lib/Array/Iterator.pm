@@ -363,29 +363,6 @@ to hold off for now until I am sure they are actually useful.
 
 =back
 
-=head1 BUGS
-
-None that I am aware of. The code is pretty thoroughly tested (see L<CODE COVERAGE> below)
-and is based on an (non-publicly released) module which I had used in production systems
-for about 2 years without incident. Of course, if you find a bug, let me know, and I will
-be sure to fix it.
-
-=head1 CODE COVERAGE
-
-I use B<Devel::Cover> to test the code coverage of my tests, below is the B<Devel::Cover>
-report on this module's test suite.
-
- ------------------------------- ------ ------ ------ ------ ------ ------ ------
- File                              stmt   bran   cond    sub    pod   time  total
- ------------------------------- ------ ------ ------ ------ ------ ------ ------
- Array/Iterator.pm                100.0  100.0   66.7  100.0  100.0   67.6   98.2
- Array/Iterator/BiDirectional.pm  100.0  100.0    n/a  100.0  100.0   20.2  100.0
- Array/Iterator/Circular.pm       100.0  100.0    n/a  100.0  100.0    7.1  100.0
- Array/Iterator/Reusable.pm       100.0    n/a    n/a  100.0  100.0    5.0  100.0
- ------------------------------- ------ ------ ------ ------ ------ ------ ------
- Total                            100.0  100.0   66.7  100.0  100.0  100.0   99.0
- ------------------------------- ------ ------ ------ ------ ------ ------ ------
-
 =head1 SEE ALSO
 
 This module now includes several subclasses of Array::Iterator which add certain behaviors

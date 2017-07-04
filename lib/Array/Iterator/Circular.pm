@@ -121,14 +121,6 @@ This method will tell you how many times the iterator has looped back to its sta
 
 =back
 
-=head1 BUGS
-
-None that I am aware of, if you find a bug, let me know, and I will be sure to fix it.
-
-=head1 CODE COVERAGE
-
-See the B<CODE COVERAGE> section of the B<Array::Iterator> documentation for information about the code coverage of this module's test suite.
-
 =head1 SEE ALSO
 
 This is a subclass of B<Array::Iterator>, please refer to it for more documenation.
