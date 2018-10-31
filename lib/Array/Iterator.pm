@@ -213,7 +213,7 @@ sub getLength { my $self = shift; $self->get_length(@_) }
 =head1 DESCRIPTION
 
 This class provides a very simple iterator interface. It is is uni-directional
-and can only be used once. It provides no means of reverseing or reseting the
+and can only be used once. It provides no means of reversing or resetting the
 iterator. It is not recommended to alter the array during iteration, however
 no attempt is made to enforce this (although I will if I can find an efficient
 means of doing so). This class only intends to provide a clear and simple
