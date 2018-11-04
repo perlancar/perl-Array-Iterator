@@ -212,8 +212,8 @@ sub getLength { my $self = shift; $self->get_length(@_) }
 
 =head1 DESCRIPTION
 
-This class provides a very simple iterator interface. It is is uni-directional
-and can only be used once. It provides no means of reverseing or reseting the
+This class provides a very simple iterator interface. It is uni-directional
+and can only be used once. It provides no means of reversing or resetting the
 iterator. It is not recommended to alter the array during iteration, however
 no attempt is made to enforce this (although I will if I can find an efficient
 means of doing so). This class only intends to provide a clear and simple
@@ -269,7 +269,7 @@ once per iteration as it will advance the index pointer to the next item. If
 this method is called after all elements have been exhausted, it will return
 undef.
 
-This method was added to allow for a faily common perl iterator idiom of:
+This method was added to allow for a fairly common perl iterator idiom of:
 
   my $current;
   while ($current = $i->get_next()) {
@@ -405,12 +405,12 @@ account for, and allow the array to be changed during iteration. It accomplishes
 control because the underlying array is tied. As we all know, tie-ing things can be a
 performance issue, but if you need what this module provides, then it will likely be
 an acceptable compromise. Array::Iterator makes no attempt to deal with this mid-iteration
-manipulation problem. In fact it is recommened to not alter your array with Array::Iterator,
+manipulation problem. In fact it is recommended to not alter your array with Array::Iterator,
 and if possible we will enforce this in later versions.
 
 =item B<Data::Iter>
 
-This module allows for simple iteratation over both hashes and arrays. It does it by
+This module allows for simple iteration over both hashes and arrays. It does it by
 importing several functions which can be used to loop over either type (hash or array)
 in the same way. It is an interesting module, it differs from Array::Iterator in
 paradigm (Array::Iterator is more OO) as well as in intent.
@@ -418,7 +418,7 @@ paradigm (Array::Iterator is more OO) as well as in intent.
 =item B<Class::Iterator>
 
 This is essentially a wrapper around a closure based iterator. This method can be very
-flexible, but at times is difficult to manage due to the inherent complextity of using
+flexible, but at times is difficult to manage due to the inherent complexity of using
 closures. I actually was a closure-as-iterator fan for a while, but eventually moved
 away from it in favor of the more plain vanilla means of iteration, like that found
 Array::Iterator.
