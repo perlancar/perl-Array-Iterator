@@ -1,9 +1,12 @@
 package Array::Iterator;
 
+# AUTHORITY
+# DATE
+# DIST
+# VERSION
+
 use strict;
 use warnings;
-
-# VERSION
 
 ### constructor
 
@@ -23,9 +26,6 @@ sub new {
 		    die "Incorrect type : __array__ value must be an ARRAY reference"
 		        unless ref $array[0]->{__array__} eq 'ARRAY';
 		    $_array = $array[0]->{__array__};
-		}
-		else {
-		    die "Incorrect Type : the argument must be an array or hash reference";
 		}
 	}
 	else {
