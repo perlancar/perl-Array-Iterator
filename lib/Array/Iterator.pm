@@ -1,12 +1,12 @@
 package Array::Iterator;
 
+use strict;
+use warnings;
+
 # AUTHORITY
 # DATE
 # DIST
 # VERSION
-
-use strict;
-use warnings;
 
 ### constructor
 
@@ -126,16 +126,16 @@ sub next {
 }
 
 sub get_next {
-	my ($self) = @_;
-        $self->{_iterated} = 1;
-    return undef unless ($self->{_current_index} < $self->{_length});
-	return $self->_getItem($self->{_iteratee}, $self->{_current_index}++);
+    my ($self) = @_;
+    $self->{_iterated} = 1;
+    return undef unless ($self->{_current_index} < $self->{_length}); ## no critic: Subroutines::ProhibitExplicitReturnUndef
+    return $self->_getItem($self->{_iteratee}, $self->{_current_index}++);
 }
 
 sub getNext { my $self = shift; $self->get_next(@_) }
 
 sub peek {
-	my ($self, $n) = @_;
+    my ($self, $n) = @_;
 
     if(not defined $n) { $n = 1 }
     elsif(not $n)      { die "peek(0) doesn't make sense, did you mean get_next()?" }
@@ -143,8 +143,8 @@ sub peek {
 
     my $idx = $self->{_current_index} + ($n - 1);
 
-    return undef unless ($idx < $self->{_length});
-	return $self->_getItem($self->{_iteratee}, $idx);
+    return undef unless ($idx < $self->{_length}); ## no critic: Subroutines::ProhibitExplicitReturnUndef
+    return $self->_getItem($self->{_iteratee}, $idx);
 }
 
 sub current {

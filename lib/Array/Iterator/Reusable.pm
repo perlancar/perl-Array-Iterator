@@ -4,9 +4,13 @@ package Array::Iterator::Reusable;
 use strict;
 use warnings;
 
+use Array::Iterator;
+
+# AUTHORITY
+# DATE
+# DIST
 # VERSION
 
-use Array::Iterator;
 our @ISA = qw(Array::Iterator);
 
 sub reset {

@@ -4,9 +4,13 @@ package Array::Iterator::BiDirectional;
 use strict;
 use warnings;
 
+use Array::Iterator;
+
+# AUTHORITY
+# DATE
+# DIST
 # VERSION
 
-use Array::Iterator;
 our @ISA = qw(Array::Iterator);
 
 sub has_previous {
@@ -32,16 +36,16 @@ sub previous {
 }
 
 sub get_previous {
-	my ($self) = @_;
-    return undef unless (($self->_current_index - 1) > 0);
-        $self->_iterated = 1;
-	return $self->_getItem($self->_iteratee, --$self->_current_index);
+    my ($self) = @_;
+    return undef unless (($self->_current_index - 1) > 0); ## no critic: Subroutines::ProhibitExplicitReturnUndef
+    $self->_iterated = 1;
+    return $self->_getItem($self->_iteratee, --$self->_current_index);
 }
 
 sub getPrevious { my $self = shift; $self->get_previous(@_) }
 
 sub look_back {
-	my ($self, $n) = @_;
+    my ($self, $n) = @_;
 
     if(not defined $n) { $n = 1 }
     elsif(not $n)      { die "look_back(0) doesn't make sense, did you mean get_previous()?" }
@@ -49,9 +53,9 @@ sub look_back {
 
     my $idx = $self->_current_index - ($n + 1);
 
-    return undef unless ($idx > 0);
+    return undef unless ($idx > 0); ## no critic: Subroutines::ProhibitExplicitReturnUndef
     $self->_iterated = 1;
-	return $self->_getItem($self->_iteratee, $idx);
+    return $self->_getItem($self->_iteratee, $idx);
 }
 
 sub lookBack { my $self = shift; $self->look_back(@_) }
