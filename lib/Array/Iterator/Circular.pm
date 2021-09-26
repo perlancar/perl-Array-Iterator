@@ -123,7 +123,7 @@ This method will tell you how many times the iterator has looped back to its sta
 
 =head1 SEE ALSO
 
-This is a subclass of B<Array::Iterator>, please refer to it for more documenation.
+This is a subclass of B<Array::Iterator>, please refer to it for more documentation.
 
 =head1 ORIGINAL AUTHOR
 

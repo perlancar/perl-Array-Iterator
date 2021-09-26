@@ -46,13 +46,13 @@ This is a subclass of Array::Iterator, only those methods that have been added a
 
 =item B<reset>
 
-This resets the interal counter of the iterator back to the start of the array.
+This resets the internal counter of the iterator back to the start of the array.
 
 =back
 
 =head1 SEE ALSO
 
-This is a subclass of B<Array::Iterator>, please refer to it for more documenation.
+This is a subclass of B<Array::Iterator>, please refer to it for more documentation.
 
 =head1 ORIGINAL AUTHOR
 
